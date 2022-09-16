@@ -1,6 +1,10 @@
 package swing;
 
 public class Book {
+	
+	//Here are properties for each book.
+	//TODO: Create a method that returns a list of type book, reading each entry from a file. 
+	
 	public String id; 
 	public String goodReadId;
 	public String bestBookId;
@@ -22,5 +26,5 @@ public class Book {
 	public String ratings4;
 	public String ratings5;
 	public String imageURl;
-
+ 
 }	
