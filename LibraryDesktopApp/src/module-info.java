@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author Alex
- *
- */
-module libraryDesktopApp {
-}
