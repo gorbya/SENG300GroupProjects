@@ -1,0 +1,21 @@
+package swing;
+
+public class GetBookList {
+
+	public static void main(String[] args) {
+		List<Book> bookList = new ArrayList<Book>();
+
+        BufferedReader reader =new BufferedReader(new FileReader("C:\Projects\ThinkDataStructures\ThinkDataStructures\code\src\com\allendowney\thinkdast\input.txt\"));
+
+        String Int_line;
+
+        while ((Int_line = reader.readLine()) != null) {
+            int In_Value = Integer.parseInt(Int_line);
+
+            listOfInts.add(In_Value);
+		// TODO Auto-generated method stub
+			Book l = new Book();
+			
+	}
+
+}

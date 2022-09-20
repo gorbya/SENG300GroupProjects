@@ -19,6 +19,7 @@ public class Book {
 	public String languageCode;
 	public String averageRating;
 	public String ratingsCount;
+	public String workRatingsCount;
 	public String workTextReviewsCount;
 	public String ratings1;
 	public String ratings2;

@@ -1,0 +1,160 @@
+package swing;
+
+import java.awt.EventQueue;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+
+public class HomePage {
+
+	private JFrame frmLibraryDesktopApp;
+
+	/**
+	 * Launch the application.
+	 * @throws IOException 
+	 */
+	public static void main(String[] args) throws IOException {
+		GetBookList("books.txt");
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					HomePage window = new HomePage();
+					window.frmLibraryDesktopApp.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public HomePage() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmLibraryDesktopApp = new JFrame();
+		frmLibraryDesktopApp.setTitle("Library Desktop App");
+		frmLibraryDesktopApp.setBounds(100, 100, 1291, 720);
+		frmLibraryDesktopApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLibraryDesktopApp.getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(226, 226, 226));
+		panel.setBounds(1060, 11, 200, 200);
+		frmLibraryDesktopApp.getContentPane().add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(226, 226, 226));
+		panel_1.setBounds(1060, 222, 200, 200);
+		frmLibraryDesktopApp.getContentPane().add(panel_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(226, 226, 226));
+		panel_2.setBounds(220, 11, 200, 200);
+		frmLibraryDesktopApp.getContentPane().add(panel_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(226, 226, 226));
+		panel_3.setBounds(220, 222, 200, 200);
+		frmLibraryDesktopApp.getContentPane().add(panel_3);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(226, 226, 226));
+		panel_4.setBounds(430, 11, 200, 200);
+		frmLibraryDesktopApp.getContentPane().add(panel_4);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(new Color(226, 226, 226));
+		panel_5.setBounds(430, 221, 200, 200);
+		frmLibraryDesktopApp.getContentPane().add(panel_5);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBackground(new Color(226, 226, 226));
+		panel_6.setBounds(640, 11, 200, 200);
+		frmLibraryDesktopApp.getContentPane().add(panel_6);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBackground(new Color(226, 226, 226));
+		panel_7.setBounds(640, 222, 200, 200);
+		frmLibraryDesktopApp.getContentPane().add(panel_7);
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBackground(new Color(226, 226, 226));
+		panel_8.setBounds(850, 11, 200, 200);
+		frmLibraryDesktopApp.getContentPane().add(panel_8);
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setBackground(new Color(226, 226, 226));
+		panel_9.setBounds(850, 222, 200, 200);
+		frmLibraryDesktopApp.getContentPane().add(panel_9);
+		
+		JPanel panel_10 = new JPanel();
+		panel_10.setBackground(new Color(0, 128, 255));
+		panel_10.setBounds(0, 0, 210, 681);
+		frmLibraryDesktopApp.getContentPane().add(panel_10);
+		panel_10.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Local District Library");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setFont(new Font("Modern No. 20", Font.PLAIN, 20));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(10, 11, 190, 40);
+		panel_10.add(lblNewLabel);
+	}
+	
+	
+		//Here is our method to get a list of book objects to populate the front end
+		public static List<Book> GetBookList(String filepath) throws IOException {
+			List<Book> bookList = new ArrayList<Book>(); //Creating the List to populate 
+	        BufferedReader reader =new BufferedReader(new FileReader(filepath));
+	        String currentLine;
+
+	        while ((currentLine = reader.readLine()) != null) {
+	        	Book b = new Book();
+	        	String[] bookDetailsArray;
+	        	//List<String> bookDetailsList = new ArrayList<String>();
+	        	bookDetailsArray = currentLine.split("[,]");
+	        	b.id = bookDetailsArray[0];
+	        	b.goodReadId = bookDetailsArray[1];
+	        	b.bestBookId = bookDetailsArray[2];
+	        	b.workId = bookDetailsArray[3];
+	        	b.booksCount = bookDetailsArray[4];
+	        	b.ibsn = bookDetailsArray[5];
+	        	b.ibsn13 = bookDetailsArray[6];
+	        	b.authors = bookDetailsArray[7];
+	        	b.orginalPublicationYear = bookDetailsArray[8];
+	        	b.orginalTitle = bookDetailsArray[9];
+	        	b.title = bookDetailsArray[10];
+	        	b.languageCode = bookDetailsArray[11];
+	        	b.averageRating = bookDetailsArray[12];
+	        	b.ratingsCount = bookDetailsArray[13];
+	        	b.workRatingsCount = bookDetailsArray[14];
+	        	b.workTextReviewsCount = bookDetailsArray[15];
+	        	b.ratings1 = bookDetailsArray[16];
+	        	b.ratings2 = bookDetailsArray[17];
+	        	b.ratings3 = bookDetailsArray[18];
+	        	b.ratings4 = bookDetailsArray[19];
+	        	b.ratings5 = bookDetailsArray[20];
+	        	b.imageURl = bookDetailsArray[21];
+	        	
+	        	bookList.add(b);
+	       	
+	        }
+	        return bookList;
+		}
+}
