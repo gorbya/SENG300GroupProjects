@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -19,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.LineBorder;
 
 public class HomePage {
 
@@ -62,14 +64,6 @@ public class HomePage {
 	 * @throws IOException 
 	 */
 	public void initialize() throws IOException {
-		List<Book> listBooks = GetBookList();
-		
-		//TODO: sort this list as requested by the user
-		//ascending and descending order
-		//search and order by id and ibsn 
-		//order by author and year
-		
-		//this sorting should display to the UI as intended s
 		
 		frmLibraryDesktopApp = new JFrame();
 		frmLibraryDesktopApp.setResizable(false);
@@ -78,6 +72,32 @@ public class HomePage {
 		frmLibraryDesktopApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLibraryDesktopApp.getContentPane().setLayout(null);
 		
+		JPanel panel_10 = new JPanel();
+		panel_10.setBackground(new Color(0, 128, 255));
+		panel_10.setBounds(0, 0, 210, 681);
+		frmLibraryDesktopApp.getContentPane().add(panel_10);
+		panel_10.setLayout(null);
+		
+		JComboBox combxOrderBy = new JComboBox();
+		combxOrderBy.setModel(new DefaultComboBoxModel(new String[] {"Author (Ascending)", "Original Publication Year (Ascending)", "Author (Descending)", "Original Publication Year (Descending)"}));
+		combxOrderBy.setBounds(10, 62, 190, 22);
+		panel_10.add(combxOrderBy);
+		
+		List<Book> listBooks = GetBookList();
+		
+		if (combxOrderBy.getSelectedItem().equals("Author (Ascending)")) {
+			listBooks.sort(Book.compareByAuthor);
+		}
+
+
+		
+		//TODO: sort this list as requested by the user
+		//ascending and descending order
+		//search and order by id and ibsn 
+		//order by author and year
+		
+		//this sorting should display to the UI as intended s
+
 		JPanel Panel = new JPanel();
 		Panel.setBackground(new Color(226, 226, 226));
 		Panel.setBounds(220, 11, 200, 200);
@@ -116,11 +136,7 @@ public class HomePage {
 		Panel.add(lblPanelRating);
 		lblPanelRating.setText("Rating: " + listBooks.get(1).averageRating);
 		
-		JPanel panel_10 = new JPanel();
-		panel_10.setBackground(new Color(0, 128, 255));
-		panel_10.setBounds(0, 0, 210, 681);
-		frmLibraryDesktopApp.getContentPane().add(panel_10);
-		panel_10.setLayout(null);
+
 		
 		JLabel lblNewLabel = new JLabel("Local District Library");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
@@ -131,31 +147,93 @@ public class HomePage {
 		
 		txtSearch = new JTextField();
 		txtSearch.setText("Search");
-		txtSearch.setBounds(10, 62, 190, 20);
+		txtSearch.setBounds(10, 115, 190, 20);
 		panel_10.add(txtSearch);
 		txtSearch.setColumns(10);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 5, true));
+		panel.setBackground(new Color(38, 11, 119));
+		panel.setBounds(10, 180, 190, 490);
+		panel_10.add(panel);
+		panel.setLayout(null);
+		
+		
+		JLabel lblResultTitle = new JLabel("Book Title");
+		lblResultTitle.setFont(new Font("Modern No. 20", Font.PLAIN, 15));
+		lblResultTitle.setForeground(new Color(255, 255, 255));
+		lblResultTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblResultTitle.setBounds(10, 11, 170, 20);
+		panel.add(lblResultTitle);
+		
+		JLabel lblResultAuthor = new JLabel("Author:");
+		lblResultAuthor.setForeground(new Color(255, 255, 255));
+		lblResultAuthor.setBounds(20, 37, 160, 14);
+		panel.add(lblResultAuthor);
+		
+		JLabel lblResultIBSN = new JLabel("IBSN:");
+		lblResultIBSN.setForeground(new Color(255, 255, 255));
+		lblResultIBSN.setBounds(20, 62, 160, 14);
+		panel.add(lblResultIBSN);
+		
+		JLabel lblResultYear = new JLabel("Year:");
+		lblResultYear.setForeground(new Color(255, 255, 255));
+		lblResultYear.setBounds(20, 87, 160, 14);
+		panel.add(lblResultYear);
+		
+		JLabel lblResultID = new JLabel("Book ID:");
+		lblResultID.setForeground(new Color(255, 255, 255));
+		lblResultID.setBounds(20, 112, 160, 14);
+		panel.add(lblResultID);
+		
+		JLabel lblResultRating = new JLabel("Rating: ");
+		lblResultRating.setForeground(new Color(255, 255, 255));
+		lblResultRating.setBounds(20, 137, 160, 14);
+		panel.add(lblResultRating);
+		
+		List<Book> listBookClean = GetBookList();
 		
 		JButton btnIBSNSearch = new JButton("by IBSN");
 		btnIBSNSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//search with given key ***************************************************************
+				Book chosenBook = searchBookIBSN(Integer.parseInt(txtSearch.getText()), listBookClean);
+				if (chosenBook == null) {
+					txtSearch.setText("Book not Found");
+				} else {
+				txtSearch.setText(chosenBook.title);
+				}
 			}
 		});
-		btnIBSNSearch.setBounds(10, 93, 90, 23);
+		btnIBSNSearch.setBounds(10, 146, 90, 23);
 		panel_10.add(btnIBSNSearch);
 		
 		JButton btnBookIDSearch = new JButton("by Book ID");
-		btnBookIDSearch.setBounds(110, 93, 90, 23);
+		btnBookIDSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//search with given key ***************************************************************
+				Book chosenBook = searchBookID(Integer.parseInt(txtSearch.getText()), listBookClean);
+				if (chosenBook == null) {
+					txtSearch.setText("Book not Found");
+				} else {
+					lblResultTitle.setText(chosenBook.title);
+					lblResultAuthor.setText("Author: "+chosenBook.authors);
+					lblResultIBSN.setText("IBSN: " +chosenBook.ibsn);
+					lblResultYear.setText("Year: " +chosenBook.orginalPublicationYear);
+					lblResultID.setText("Book ID: " +chosenBook.id);
+					lblResultRating.setText("Rating: " +chosenBook.averageRating);
+				}
+			}
+		});
+		btnBookIDSearch.setBounds(110, 146, 90, 23);
 		panel_10.add(btnBookIDSearch);
 		
-		JComboBox combxOrderBy = new JComboBox();
-		combxOrderBy.setModel(new DefaultComboBoxModel(new String[] {"Author (Ascending)", "Original Publication Year (Ascending)", "Author (Descending)", "Original Publication Year (Descending)"}));
-		combxOrderBy.setBounds(10, 147, 190, 22);
-		panel_10.add(combxOrderBy);
+
 		
 		JLabel lblNewLabel_1 = new JLabel("Order By");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_1.setForeground(new Color(226, 226, 226));
-		lblNewLabel_1.setBounds(10, 127, 66, 14);
+		lblNewLabel_1.setBounds(10, 46, 66, 14);
 		panel_10.add(lblNewLabel_1);
 		
 		JPanel Panel_1 = new JPanel();
@@ -446,9 +524,7 @@ public class HomePage {
 		lblPanelRating_9.setBounds(10, 110, 180, 14);
 		Panel_9.add(lblPanelRating_9);
 	}
-	
-	
-		//;TODO: List.orderBy(book.author, descending)
+
 	
 		//Here is our method to get a list of book objects to populate the front end
 		public static List<Book> GetBookList() throws IOException {
@@ -488,5 +564,47 @@ public class HomePage {
 	       	
 	        }
 	        return bookList;
+		}
+		
+		public static Book searchBookID(int id, List<Book> listBooks) {
+			int mid = 0;
+			int low = 0; 
+			int high = listBooks.size() - 1;
+			
+			while (high >= low) {
+				mid = (high + low) / 2;
+				if (Integer.parseInt(listBooks.get(mid).id) < id) {
+					low = mid + 1;
+				}
+				else if (Integer.parseInt(listBooks.get(mid).id) > id) {
+					high = mid - 1;
+				}
+				else {
+					return listBooks.get(mid);
+				}
+			}
+			return null; 
+		}
+		
+		public static Book searchBookIBSN(int IBSN, List<Book> listBooks) {
+			listBooks.sort(Book.compareByIBSN);
+			int mid = 0;
+			int low = 0; 
+			int high = listBooks.size() - 1;
+			
+			
+			while (high >= low) {
+				mid = (high + low) / 2;
+				if (Integer.parseInt(listBooks.get(mid).ibsn) < IBSN) {
+					low = mid + 1;
+				}
+				else if (Integer.parseInt(listBooks.get(mid).ibsn) > IBSN) {
+					high = mid - 1;
+				}
+				else {
+					return listBooks.get(mid);
+				}
+			}
+			return null; 
 		}
 }
