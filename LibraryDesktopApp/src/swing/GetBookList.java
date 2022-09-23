@@ -18,7 +18,7 @@ public class GetBookList {
         	String[] bookDetailsArray;
         	//List<String> bookDetailsList = new ArrayList<String>();
         	bookDetailsArray = currentLine.split("[,]");
-        	b.id = bookDetailsArray[0];
+        	b.id = Integer.parseInt(bookDetailsArray[0]);
         	b.goodReadId = bookDetailsArray[1];
         	b.bestBookId = bookDetailsArray[2];
         	b.workId = bookDetailsArray[3];

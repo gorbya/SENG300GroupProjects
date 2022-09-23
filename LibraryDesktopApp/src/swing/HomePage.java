@@ -49,6 +49,11 @@ public class HomePage {
 	 */
 	public HomePage() throws IOException {
 		initialize();
+		
+//		if (txtSearch.getText() == "lol") {
+//			txtSearch.setText("lmao");
+//		}
+			
 
 	}
 
@@ -58,6 +63,14 @@ public class HomePage {
 	 */
 	public void initialize() throws IOException {
 		List<Book> listBooks = GetBookList();
+		
+		//TODO: sort this list as requested by the user
+		//ascending and descending order
+		//search and order by id and ibsn 
+		//order by author and year
+		
+		//this sorting should display to the UI as intended s
+		
 		frmLibraryDesktopApp = new JFrame();
 		frmLibraryDesktopApp.setResizable(false);
 		frmLibraryDesktopApp.setTitle("Library Desktop App");
@@ -293,15 +306,15 @@ public class HomePage {
 		lblPanelIBSN_5.setBounds(10, 50, 180, 14);
 		Panel_5.add(lblPanelIBSN_5);
 		
-		JLabel lblPanelyear_5 = new JLabel("Year");
+		JLabel lblPanelyear_5 = new JLabel("Year: " + listBooks.get(6).orginalPublicationYear);
 		lblPanelyear_5.setBounds(10, 70, 180, 14);
 		Panel_5.add(lblPanelyear_5);
 		
-		JLabel lblPanelBookID_5 = new JLabel("Book ID");
+		JLabel lblPanelBookID_5 = new JLabel("Book ID: " + listBooks.get(6).id);
 		lblPanelBookID_5.setBounds(10, 90, 180, 14);
 		Panel_5.add(lblPanelBookID_5);
 		
-		JLabel lblPanelRating_5 = new JLabel("Rating");
+		JLabel lblPanelRating_5 = new JLabel("Rating: " + listBooks.get(6).averageRating);
 		lblPanelRating_5.setBounds(10, 110, 180, 14);
 		Panel_5.add(lblPanelRating_5);
 		
@@ -311,29 +324,29 @@ public class HomePage {
 		Panel_6.setBounds(430, 222, 200, 200);
 		frmLibraryDesktopApp.getContentPane().add(Panel_6);
 		
-		JLabel lblPanelTitle_6 = new JLabel("Book Title");
+		JLabel lblPanelTitle_6 = new JLabel(listBooks.get(7).title);
 		lblPanelTitle_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPanelTitle_6.setFont(new Font("Modern No. 20", Font.PLAIN, 13));
 		lblPanelTitle_6.setBounds(10, 11, 180, 14);
 		Panel_6.add(lblPanelTitle_6);
 		
-		JLabel lblPanelAuth_6 = new JLabel("Author");
+		JLabel lblPanelAuth_6 = new JLabel("Author: " + listBooks.get(7).authors);
 		lblPanelAuth_6.setBounds(10, 30, 180, 14);
 		Panel_6.add(lblPanelAuth_6);
 		
-		JLabel lblPanelIBSN_6 = new JLabel("IBSN");
+		JLabel lblPanelIBSN_6 = new JLabel("IBSN: " + listBooks.get(7).ibsn);
 		lblPanelIBSN_6.setBounds(10, 50, 180, 14);
 		Panel_6.add(lblPanelIBSN_6);
 		
-		JLabel lblPanelyear_6 = new JLabel("Year");
+		JLabel lblPanelyear_6 = new JLabel("Year: " + listBooks.get(7).orginalPublicationYear);
 		lblPanelyear_6.setBounds(10, 70, 180, 14);
 		Panel_6.add(lblPanelyear_6);
 		
-		JLabel lblPanelBookID_6 = new JLabel("Book ID");
+		JLabel lblPanelBookID_6 = new JLabel("Book ID: " + listBooks.get(7).id);
 		lblPanelBookID_6.setBounds(10, 90, 180, 14);
 		Panel_6.add(lblPanelBookID_6);
 		
-		JLabel lblPanelRating_6 = new JLabel("Rating");
+		JLabel lblPanelRating_6 = new JLabel("Rating: " +listBooks.get(7).averageRating);
 		lblPanelRating_6.setBounds(10, 110, 180, 14);
 		Panel_6.add(lblPanelRating_6);
 		
@@ -343,29 +356,29 @@ public class HomePage {
 		Panel_7.setBounds(640, 222, 200, 200);
 		frmLibraryDesktopApp.getContentPane().add(Panel_7);
 		
-		JLabel lblPanelTitle_7 = new JLabel("Book Title");
+		JLabel lblPanelTitle_7 = new JLabel(listBooks.get(8).title);
 		lblPanelTitle_7.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPanelTitle_7.setFont(new Font("Modern No. 20", Font.PLAIN, 13));
 		lblPanelTitle_7.setBounds(10, 11, 180, 14);
 		Panel_7.add(lblPanelTitle_7);
 		
-		JLabel lblPanelAuth_7 = new JLabel("Author");
+		JLabel lblPanelAuth_7 = new JLabel("Author: " + listBooks.get(8).authors);
 		lblPanelAuth_7.setBounds(10, 30, 180, 14);
 		Panel_7.add(lblPanelAuth_7);
 		
-		JLabel lblPanelIBSN_7 = new JLabel("IBSN");
+		JLabel lblPanelIBSN_7 = new JLabel("IBSN: " + listBooks.get(8).ibsn);
 		lblPanelIBSN_7.setBounds(10, 50, 180, 14);
 		Panel_7.add(lblPanelIBSN_7);
 		
-		JLabel lblPanelyear_7 = new JLabel("Year");
+		JLabel lblPanelyear_7 = new JLabel("Year: " + listBooks.get(8).orginalPublicationYear);
 		lblPanelyear_7.setBounds(10, 70, 180, 14);
 		Panel_7.add(lblPanelyear_7);
 		
-		JLabel lblPanelBookID_7 = new JLabel("Book ID");
+		JLabel lblPanelBookID_7 = new JLabel("Book ID; " + listBooks.get(8).id);
 		lblPanelBookID_7.setBounds(10, 90, 180, 14);
 		Panel_7.add(lblPanelBookID_7);
 		
-		JLabel lblPanelRating_7 = new JLabel("Rating");
+		JLabel lblPanelRating_7 = new JLabel("Rating: " + listBooks.get(8).averageRating);
 		lblPanelRating_7.setBounds(10, 110, 180, 14);
 		Panel_7.add(lblPanelRating_7);
 		
@@ -375,29 +388,29 @@ public class HomePage {
 		Panel_8.setBounds(850, 222, 200, 200);
 		frmLibraryDesktopApp.getContentPane().add(Panel_8);
 		
-		JLabel lblPanelTitle_8 = new JLabel("Book Title");
+		JLabel lblPanelTitle_8 = new JLabel(listBooks.get(8).title);
 		lblPanelTitle_8.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPanelTitle_8.setFont(new Font("Modern No. 20", Font.PLAIN, 13));
 		lblPanelTitle_8.setBounds(10, 11, 180, 14);
 		Panel_8.add(lblPanelTitle_8);
 		
-		JLabel lblPanelAuth_8 = new JLabel("Author");
+		JLabel lblPanelAuth_8 = new JLabel("Author: " + listBooks.get(9).authors);
 		lblPanelAuth_8.setBounds(10, 30, 180, 14);
 		Panel_8.add(lblPanelAuth_8);
 		
-		JLabel lblPanelIBSN_8 = new JLabel("IBSN");
+		JLabel lblPanelIBSN_8 = new JLabel("IBSN: " + listBooks.get(9).ibsn);
 		lblPanelIBSN_8.setBounds(10, 50, 180, 14);
 		Panel_8.add(lblPanelIBSN_8);
 		
-		JLabel lblPanelyear_8 = new JLabel("Year");
+		JLabel lblPanelyear_8 = new JLabel("Year: " + listBooks.get(9).orginalPublicationYear);
 		lblPanelyear_8.setBounds(10, 70, 180, 14);
 		Panel_8.add(lblPanelyear_8);
 		
-		JLabel lblPanelBookID_8 = new JLabel("Book ID");
+		JLabel lblPanelBookID_8 = new JLabel("Book ID: " + listBooks.get(9).id);
 		lblPanelBookID_8.setBounds(10, 90, 180, 14);
 		Panel_8.add(lblPanelBookID_8);
 		
-		JLabel lblPanelRating_8 = new JLabel("Rating");
+		JLabel lblPanelRating_8 = new JLabel("Rating: " + listBooks.get(9).averageRating);
 		lblPanelRating_8.setBounds(10, 110, 180, 14);
 		Panel_8.add(lblPanelRating_8);
 		
@@ -407,29 +420,29 @@ public class HomePage {
 		Panel_9.setBounds(1060, 222, 200, 200);
 		frmLibraryDesktopApp.getContentPane().add(Panel_9);
 		
-		JLabel lblPanelTitle_9 = new JLabel("Book Title");
+		JLabel lblPanelTitle_9 = new JLabel(listBooks.get(9).title);
 		lblPanelTitle_9.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPanelTitle_9.setFont(new Font("Modern No. 20", Font.PLAIN, 13));
 		lblPanelTitle_9.setBounds(10, 11, 180, 14);
 		Panel_9.add(lblPanelTitle_9);
 		
-		JLabel lblPanelAuth_9 = new JLabel("Author");
+		JLabel lblPanelAuth_9 = new JLabel("Author: " + listBooks.get(10).authors);
 		lblPanelAuth_9.setBounds(10, 30, 180, 14);
 		Panel_9.add(lblPanelAuth_9);
 		
-		JLabel lblPanelIBSN_9 = new JLabel("IBSN");
+		JLabel lblPanelIBSN_9 = new JLabel("IBSN: " + listBooks.get(10).ibsn);
 		lblPanelIBSN_9.setBounds(10, 50, 180, 14);
 		Panel_9.add(lblPanelIBSN_9);
 		
-		JLabel lblPanelyear_9 = new JLabel("Year");
+		JLabel lblPanelyear_9 = new JLabel("Year: " + listBooks.get(10).orginalPublicationYear);
 		lblPanelyear_9.setBounds(10, 70, 180, 14);
 		Panel_9.add(lblPanelyear_9);
 		
-		JLabel lblPanelBookID_9 = new JLabel("Book ID");
+		JLabel lblPanelBookID_9 = new JLabel("Book ID: " + listBooks.get(10).id);
 		lblPanelBookID_9.setBounds(10, 90, 180, 14);
 		Panel_9.add(lblPanelBookID_9);
 		
-		JLabel lblPanelRating_9 = new JLabel("Rating");
+		JLabel lblPanelRating_9 = new JLabel("Rating: " + listBooks.get(10).averageRating);
 		lblPanelRating_9.setBounds(10, 110, 180, 14);
 		Panel_9.add(lblPanelRating_9);
 	}
