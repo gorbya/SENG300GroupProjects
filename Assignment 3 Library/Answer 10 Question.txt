@@ -1,0 +1,3 @@
+Our Binary Search results came back with a runtime of 0ms
+
+Our Linear Search results came back with a runtime of 3ms

@@ -44,14 +44,25 @@ public class Book {
 		}
 	};
 	
-//	static Comparator<Book> compareByYear = new Comparator<Book>() {
-//		@Override
-//		public int compare(Book b1, Book b2) {
-//			return b1.getYear().compareTo(b2.getYear());
-//		}
-//	};
+	static Comparator<Book> compareByYear = new Comparator<Book>() {
+		@Override
+		public int compare(Book b1, Book b2) {
+			return b1.getYear().compareTo(b2.getYear());
+		}
+	};
+	
 	protected Integer getYear() {
-		Integer year = Integer.parseInt(Book.this.orginalPublicationYear);
+		String formattedYear = Book.this.orginalPublicationYear;
+
+	//	formattedYear = String.format("%.0f", formattedYear);
+
+		if (formattedYear.equals("")) {
+			return -1;
+		}
+		else {
+			formattedYear = formattedYear.substring(0, formattedYear.length() - 2);
+		}
+		Integer year = Integer.parseInt(formattedYear);
 		return year;
 	}
 	
